@@ -6,5 +6,6 @@ class UserForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
     phonenumber = StringField('Phone Number', validators=[DataRequired()])
+    propertyaddress = StringField('Property Address', validators=[DataRequired()])
     notes = StringField('Notes', validators=[DataRequired()])
     submit = SubmitField('Submit')
