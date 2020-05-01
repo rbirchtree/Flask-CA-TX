@@ -1,10 +1,22 @@
-from flask import render_template
-from app import app
+from flask import render_template, flash, redirect
+from app import app, db
+from app.forms import UserForm
+from app.models import User
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET','POST'])
+@app.route('/index', methods=['GET','POST'])
 def index():
-    return render_template('index.html')
+    form = UserForm()
+    if form.validate_on_submit():
+        user = User(username=form.username.data, phonenumber=form.phonenumber.data,
+        email=form.email.data, notes=form.notes.data)
+        db.session.add(user)
+        db.session.commit()
+        flash('Thanks for submitting your info!'.format(
+            form.username.data
+        ))
+        return redirect('/index')
+    return render_template('index.html',form=form)
 
 @app.route('/about')
 def about():
