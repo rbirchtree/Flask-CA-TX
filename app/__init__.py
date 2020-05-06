@@ -11,5 +11,5 @@ db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 
 from app import routes, models, errors
-
-app.run()
+if __name__ == "__main__":
+    app.run()
